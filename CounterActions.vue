@@ -8,17 +8,20 @@
 </template>
 
 <script>
-import { useStore } from 'vuex'
+import { useCountStore } from './compositions/count';
+import { useComplexCount } from './compositions/complex-count';
 
 export default {
   setup() {
-    const store = useStore()
+    const { increment, decrement } = useCountStore();
+
+    const { incrementIfOdd, incrementAsync } = useComplexCount();
 
     return {
-      increment: () => store.dispatch('increment'),
-      decrement: () => store.dispatch('decrement'),
-      incrementIfOdd: () => store.dispatch('incrementIfOdd'),
-      incrementAsync: () => store.dispatch('incrementAsync')
+      increment,
+      decrement,
+      incrementIfOdd,
+      incrementAsync,
     }
   }
 }

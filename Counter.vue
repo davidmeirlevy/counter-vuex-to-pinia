@@ -6,18 +6,18 @@
 </template>
 
 <script>
-import { computed } from 'vue'
-import { useStore } from 'vuex'
 import CounterActions from './CounterActions.vue';
+import { useCountStore } from './compositions/count';
+import { toRefs } from 'vue';
 
 export default {
   components: { CounterActions },
   setup() {
-    const store = useStore()
-
+    const store = useCountStore()
+    const { count, evenOrOdd } = toRefs(store);
     return {
-      count: computed(() => store.state.count),
-      evenOrOdd: computed(() => store.getters.evenOrOdd),
+      count,
+      evenOrOdd
     }
   }
 }
